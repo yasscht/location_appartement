@@ -26,6 +26,7 @@ import com.appartementlocation.projet.enumeration.Gender;
 public class User {
 
    @Id
+
    private String userName;
 	private String firstName;
 	private String lastName;
@@ -40,13 +41,19 @@ public class User {
 	private LocalDateTime deletedAt;
 	@Enumerated(EnumType.STRING)
 	private Gender gender;
+	@Column(name = "adresse",nullable = true)
 	private String adresse;
+	@Column(name = "photo",nullable = true)
 	private String photo;
 @OneToMany
 private Set<Annonce> annonces =new HashSet<>();
+
+@OneToMany
+private Set<Demand> demands =new HashSet<>();
+
 	public User(String userName, String firstName, String lastName, String email, String phone, String password,
 		LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt, Gender gender, String adresse,
-		String photo, Set<Annonce> annonces, String ville, Set<Role> role) {
+		String photo, Set<Annonce> annonces,Set<Demand> demands, String ville, Set<Role> role) {
 	super();
 	this.userName = userName;
 	this.firstName = firstName;
@@ -63,6 +70,7 @@ private Set<Annonce> annonces =new HashSet<>();
 	this.annonces = annonces;
 	this.ville = ville;
 	this.role = role;
+	this.demands = demands;
 }
 	public Set<Annonce> getAnnonces() {
 	return annonces;
@@ -200,6 +208,14 @@ public void setAnnonces(Set<Annonce> annonces) {
 	public User() {
 		super();
 	}
+	public Set<Demand> getDemands() {
+		return demands;
+	}
+	public void setDemands(Set<Demand> demands) {
+		this.demands = demands;
+	}
+	
+	
 	
 
 }

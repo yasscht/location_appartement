@@ -65,6 +65,19 @@ public class UserService {
 		userRepository.save(locataire);
 		
 		
+		User admin=new User();
+		admin.setUserName("soufianchabou@gmail.com");
+		admin.setEmail("soufianchabou@gmail.com");
+		admin.setFirstName("Soufian");
+		admin.setLastName("chabou");
+		admin.setPassword(getEncodedPassword("1234"));
+		
+		Set<Role> adminRoles=new HashSet<>();
+		adminRoles.add(locataireRole);
+		admin.setRole(adminRoles);
+		userRepository.save(admin);
+		
+		
 	
 		
 		

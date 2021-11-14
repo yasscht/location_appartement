@@ -1,5 +1,6 @@
 package com.appartementlocation.projet.models;
 
+import java.sql.Date;
 import java.time.LocalDateTime;
 
 import javax.persistence.CascadeType;
@@ -11,7 +12,9 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.appartementlocation.projet.enumeration.Gender;
@@ -26,9 +29,9 @@ public class Demand {
 	@Id @GeneratedValue(strategy =GenerationType.AUTO )
 	private Long id;
 	@Column(name = "date_debut_location")
-	private LocalDateTime dateDebutLocation;
+	private Date dateDebutLocation;
 	@Column(name = "date_fin_location")
-	private LocalDateTime dateFinLocation;
+	private Date dateFinLocation;
 	@Column(name = "nombre_personnes")
 	private int NombrePersonnes;
 
@@ -36,14 +39,22 @@ public class Demand {
 	private Gender genre;
 	
 	@Enumerated(EnumType.STRING)
-	private StatusDemand status;
+	private StatusDemand status = StatusDemand.PENDING;
 	
-	@ManyToOne(fetch = FetchType.LAZY,
-            cascade = CascadeType.ALL)
-	private Annonce annonce;
+//	@ManyToOne(fetch = FetchType.LAZY,
+//            cascade = CascadeType.ALL)
+//	@JoinColumn(name = "annonce_id")
+//	
+////	 @ManyToOne(cascade = CascadeType.MERGE)
+////    @JoinColumn(name = "annonce_id", nullable = false)
+	@ManyToOne
+    @JoinColumn(name = "annonce_id")
+   	private Annonce annonce;
 
-	@ManyToOne(fetch = FetchType.LAZY,
-        cascade = CascadeType.ALL)
+//	@ManyToOne(fetch = FetchType.LAZY,
+//        cascade = CascadeType.ALL)
+	@ManyToOne
+	@JoinColumn(name = "username")
 	private User user;
 
 	@Column(name = "created_at")
@@ -52,27 +63,35 @@ public class Demand {
 	private LocalDateTime updated_at;
 	@Column(name = "deleted_at",nullable = true)
 	private LocalDateTime deleted_at;
-	public Demand(LocalDateTime dateDebutLocation, LocalDateTime dateFinLocation, int nombrePersonnes, Gender genre,
-			StatusDemand status, Annonce annonce, User user) {
+	
+	
+	
+	
+	
+	
+	
+	
+	public Demand(Date dateDebutLocation, Date dateFinLocation, int nombrePersonnes, Gender genre,
+		 Annonce annonce, User user) {
 		super();
 		this.dateDebutLocation = dateDebutLocation;
 		this.dateFinLocation = dateFinLocation;
 		NombrePersonnes = nombrePersonnes;
 		this.genre = genre;
-		this.status = status;
+		
 		this.annonce = annonce;
 		this.user = user;
 	}
-	public LocalDateTime getDateDebutLocation() {
+	public Date getDateDebutLocation() {
 		return dateDebutLocation;
 	}
-	public void setDateDebutLocation(LocalDateTime dateDebutLocation) {
+	public void setDateDebutLocation(Date dateDebutLocation) {
 		this.dateDebutLocation = dateDebutLocation;
 	}
-	public LocalDateTime getDateFinLocation() {
+	public Date getDateFinLocation() {
 		return dateFinLocation;
 	}
-	public void setDateFinLocation(LocalDateTime dateFinLocation) {
+	public void setDateFinLocation(Date dateFinLocation) {
 		this.dateFinLocation = dateFinLocation;
 	}
 	public int getNombrePersonnes() {
@@ -122,6 +141,9 @@ public class Demand {
 	}
 	public void setDeleted_at(LocalDateTime deleted_at) {
 		this.deleted_at = deleted_at;
+	}
+	public Demand() {
+		super();
 	}
 	
 	

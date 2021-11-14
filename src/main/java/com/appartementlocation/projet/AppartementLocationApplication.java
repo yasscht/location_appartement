@@ -35,8 +35,8 @@ public class AppartementLocationApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(AppartementLocationApplication.class, args);
-		new File(com.appartementlocation.projet.controllers.PhotosImmobilierController.uploadDirectory).mkdir();
-		SpringApplication.run(com.appartementlocation.projet.controllers.PhotosImmobilierController.class, args);
+//		new File(com.appartementlocation.projet.controllers.PhotosImmobilierController.uploadDirectory).mkdir();
+//		SpringApplication.run(com.appartementlocation.projet.controllers.PhotosImmobilierController.class, args);
 	}
 
 	@Bean

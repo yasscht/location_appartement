@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -61,7 +63,7 @@ public class Annonce {
 //            cascade = CascadeType.ALL)
 
 	@ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "username")
 //	referencedColumnName = "id"
 	private User user;
 	
@@ -87,6 +89,8 @@ public class Annonce {
 	@Column(name = "deleted_at",nullable = true)
 	private LocalDateTime deleted_at;
 	
+	@OneToMany
+	private Set<Demand> demands = new HashSet<>();
 
 	
 	public Annonce(String title, String description, Date dateDisponibilite, float prixMois,
@@ -115,7 +119,7 @@ public class Annonce {
 	
 	
 	public Annonce(String title, String description, Date dateDisponibilite, float prixMois,
-			int nombrePersonnes, PublicCible publicCible, StatusAnnonce status, String adresse, int etage, User user) {
+			int nombrePersonnes, PublicCible publicCible, StatusAnnonce status, String adresse, int etage, User user,Set<Demand> demands) {
 		super();
 		this.title = title;
 		this.description = description;
@@ -127,12 +131,27 @@ public class Annonce {
 		this.adresse = adresse;
 		this.etage = etage;
 		this.user = user;
+		this.demands = demands;
 	}
 
 
 
 
 
+
+
+
+
+	public Set<Demand> getDemands() {
+		return demands;
+	}
+
+
+
+
+	public void setDemands(Set<Demand> demands) {
+		this.demands = demands;
+	}
 
 
 
