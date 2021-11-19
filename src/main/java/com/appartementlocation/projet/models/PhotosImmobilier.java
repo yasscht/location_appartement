@@ -33,6 +33,7 @@ public class PhotosImmobilier {
 
 
 	@Lob
+	@Column(length=1000000000)
 	private byte[] data;
 	public byte[] getData() {
 		return data;

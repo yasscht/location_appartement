@@ -83,7 +83,7 @@ public class AnnonceServiceImpl implements AnnonceService{
 	@Override
 	public List<Annonce> getAnnonces() {
 		// TODO Auto-generated method stub
-		return annonceRepository.findAll();
+		return annonceRepository.findAllByOrderByIdDesc();
 	}
 
 	@Override
@@ -168,11 +168,13 @@ public class AnnonceServiceImpl implements AnnonceService{
 		return null;
 	}
 
+
 	@Override
-	public List<Annonce> getAnnoncesByNbrPersonne(int nbr) {
+	public List<Annonce> getAnnoncesByNbrPersonne(int min,int max) {
 		// TODO Auto-generated method stub
-		return null;
+		return annonceRepository.findByNbPersonneBetween(min, max);
 	}
+
 
 	@Override
 	public List<Annonce> filterAnnonceByPrice(int min, int max) {

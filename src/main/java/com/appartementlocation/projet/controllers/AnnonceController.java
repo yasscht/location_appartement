@@ -21,6 +21,7 @@ import com.appartementlocation.projet.enumeration.PublicCible;
 import com.appartementlocation.projet.models.Annonce;
 import com.appartementlocation.projet.models.User;
 import com.appartementlocation.projet.payload.Date;
+import com.appartementlocation.projet.payload.Personne;
 import com.appartementlocation.projet.payload.MinMax;
 import com.appartementlocation.projet.repository.AnnonceRepository;
 import com.appartementlocation.projet.services.PhotosImmobilierService;
@@ -88,6 +89,7 @@ public class AnnonceController {
 	
 	
 	
+	
 	@PostMapping("annonce/addreglement")
 	public ResponseEntity<?>  addReglementToAnnonce(@RequestBody ReglementToAnnonceForm  reglementToAnnonceForm) {
 		annonceServiceImpl.addReglementToAnnonce(reglementToAnnonceForm.getIdAnnonce(), reglementToAnnonceForm.getIdReglement());
@@ -131,9 +133,16 @@ public class AnnonceController {
 		
 
 			return annonceServiceImpl.filterByDateDisponibiliter(obj.getDate_fin(), obj.getDate_debut());
-			
 	
 	}
+	
+	@PostMapping("/annonces/nb_personne")
+	public List<Annonce> getfilterByNbPersonne(@RequestBody Personne obj){
+		
+			return annonceServiceImpl.getAnnoncesByNbrPersonne(obj.getMin(),obj.getMax());
+	
+	}
+	
 
 }
 

@@ -31,6 +31,8 @@ public class UserController {
 	@Autowired
 	private UserRepository userRepository;
 	@Autowired
+	private JwtService jwtService;
+	@Autowired
 	private JwtUtil jwtUtil;
 	@Autowired
 	private UserService userService;
@@ -51,8 +53,26 @@ public User registerUser(@RequestBody User user) {
 	    
 	    UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication()
                 .getPrincipal();
+	    
+	   
 	    return userDetails;
 	}
+	@GetMapping({"/profil"})
+	public User getDetails(HttpServletRequest request) {
+	    
+	  String token=request.getHeader("Authorization");
+		String jwtToken=token.substring(7);
+		String username=jwtUtil.getUserNameFromToken(jwtToken);
+		User user= userRepository.findById(username).get();
+		return user;
+	  
+	  
+	    
+	   
+	    
+	}
+	
+	
 	@GetMapping({"/forStudent"})
 
 	public String forStudent() {

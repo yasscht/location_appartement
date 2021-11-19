@@ -73,6 +73,7 @@ public class JwtService implements UserDetailsService {
 private void authenticate(String username,String password) throws Exception{
 	try {
 		authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
+		
 	} catch (DisabledException e) {
 		throw new Exception("User diseabled");
 	} catch (BadCredentialsException e) {

@@ -22,6 +22,7 @@ public class UserService {
 	@Autowired
 	private UserRepository userRepository;
 	public User registerUser(User user) {
+		user.setPassword(getEncodedPassword(user.getPassword()));
 		return userRepository.save(user);
 	}
 	

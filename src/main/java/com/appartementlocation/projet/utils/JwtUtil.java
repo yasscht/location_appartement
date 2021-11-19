@@ -55,4 +55,5 @@ public String generateToken(UserDetails userDetails) {
 			.signWith(SignatureAlgorithm.HS512,SECRET_KEY)
 			.compact();
 }
+
 }

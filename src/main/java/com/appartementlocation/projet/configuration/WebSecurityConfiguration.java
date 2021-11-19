@@ -1,6 +1,8 @@
 package com.appartementlocation.projet.configuration;
 
 
+import javax.servlet.http.Cookie;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.context.annotation.Bean;
@@ -16,6 +18,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 
 import com.appartementlocation.projet.services.JwtService;
 
@@ -39,8 +42,10 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter{
 	@Override
 	protected void configure(HttpSecurity httpSecurity) throws Exception{
 		httpSecurity.cors();
+	  
 	              httpSecurity.csrf().disable()
-		                .authorizeRequests().antMatchers("/authenticate").permitAll()
+		                .authorizeRequests().antMatchers("/authenticate","/deconnecter","/registerUser","/api/annonces").permitAll()
+		              
 		                .antMatchers(HttpHeaders.ALLOW).permitAll()
 		                .anyRequest().authenticated()
 		                .and()
@@ -50,6 +55,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter{
 		                ;
 		httpSecurity.addFilterBefore(jwtRequestFilter,UsernamePasswordAuthenticationFilter.class);
 		
+	          
 	}
 
 	@Bean

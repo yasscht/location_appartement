@@ -30,9 +30,13 @@ public interface AnnonceService {
 	List<Annonce> getMesAnnonces();
 	List<Annonce> getAnnoncesByGender(PublicCible gender);
 	List<Annonce> getAnnoncesByPrice(float prix);
-	List<Annonce> getAnnoncesByNbrPersonne(int nbr);
+	List<Annonce> getAnnoncesByNbrPersonne(int min,int max);
 
 	
 	List<Annonce> filterAnnonceByPrice(int min,int max);
 	List<Annonce> filterByDateDisponibiliter(Date date_debut,Date debut_fin);
+
+	
+
+
 } 
